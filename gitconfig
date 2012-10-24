@@ -1,0 +1,26 @@
+[user]
+	name = Marshall Allen Beddoe
+	email = unmarshal@gmail.com
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+
+  undo = reset --hard
+  master = pull --rebase
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+
+[color]
+	ui = auto
+[core]
+  excludesfile = /Users/marshall/.gitignore_global
+  whitespace = trailing-space,space-before-tab
+
