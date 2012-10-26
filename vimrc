@@ -101,22 +101,14 @@ map <C-t> :FufFile **/<CR>
 " use sudo to save file if needed
 cmap w!! w !sudo tee % >/dev/null
 
-" clojure support
-let vimclojure#WantNailgun = 1
-let g:vimclojure#HighlightBuiltins = 1
-let g:vimclojure#ParenRainbow = 1
-
-" clojure helptags
-helptags ~/.vim/bundle/VimClojure/doc/
-
 " c++ with clang
 let g:clang_user_options='|| exit 0'
 let g:clang_complete_auto = 1
 let g:clang_complete_copen = 1
 
 " vim screen
-let g:ScreenImpl='Tmux' " I use tmux
-noremap <leader>S :ScreenShell " Open a shell/repl
-vnoremap <leader>s :ScreenSend<CR> " send current visual selection to a shell/repl
-noremap <leader>s :ScreenSend<CR> " send a whole buffer to shell/repl
+"let g:ScreenImpl='Tmux' " I use tmux
+"noremap <leader>S :ScreenShell " Open a shell/repl
+"vnoremap <leader>s :ScreenSend<CR> " send current visual selection to a shell/repl
+"noremap <leader>s :ScreenSend<CR> " send a whole buffer to shell/repl
 "

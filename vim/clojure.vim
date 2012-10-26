@@ -1,14 +1,19 @@
-" Clojure support
+" clojure support
+let vimclojure#WantNailgun = 1
+
+" clojure helptags
+helptags ~/.vim/bundle/VimClojure/doc/
+
 let vimclojure#FuzzyIndent=1
 let vimclojure#HighlightBuiltins=1
 let vimclojure#HighlightContrib=1
 let vimclojure#DynamicHighlighting=1
 let vimclojure#ParenRainbow=1
 let vimclojure#SplitPos = "right"
-"let vimclojure#WantNailgun=1
-"let vimclojure#NailgunClient = $HOME . "/.bin/ng"
 
-let g:slime_target = "screen"
+"let g:slime_target = "screen"
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.slime_paste"
 
 let g:clang_snippets=1
 let g:clang_conceal_snippets=1
