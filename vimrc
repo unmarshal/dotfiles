@@ -12,6 +12,8 @@ set autoindent
 set smartindent
 retab "convert tabs to spaces
 
+au BufNewFile,BufRead *.hbs set filetype=html
+
 " remember history of cursor
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
@@ -47,7 +49,9 @@ autocmd filetype html,xml set listchars-=tab:>.
 syn on
 
 " default colors
-colorscheme desert-warm-256
+"colorscheme desert-warm-256
+"colorscheme wombat
+colorscheme jellybeans
 
 if has("gui_running")
   "colorscheme wombat
