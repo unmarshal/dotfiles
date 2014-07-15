@@ -13,6 +13,13 @@ set smartindent
 retab "convert tabs to spaces
 
 au BufNewFile,BufRead *.hbs set filetype=html
+au BufNewFile,BufRead *.html.* set filetype=html
+au BufNewFile,BufRead *.jst.* set filetype=html
+
+au BufNewFile,BufRead *.hql set filetype=hive
+au BufNewFile,BufRead *.q set filetype=hive
+
+au BufNewFile,BufRead Gemfile* set filetype=ruby
 
 " remember history of cursor
 set viminfo='10,\"100,:20,%,n~/.viminfo
