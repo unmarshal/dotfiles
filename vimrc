@@ -2,6 +2,8 @@ filetype on " recognize file type based on filename extension
 filetype plugin on " load plugins directory
 filetype plugin indent on
 
+set modeline
+set modelines=50
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -44,6 +46,11 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" Tab navigation
+nnoremap <C-k> :tabprevious<CR>
+nnoremap <C-j> :tabnext<CR>
+nnoremap <C-t> :tabnew<CR>
 
 set list
 set listchars=tab:>.,extends:#,nbsp:.
