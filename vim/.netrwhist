@@ -1,3 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/marshall/test_cross_origin_post/host1/public'
+let g:netrw_dirhist_2='/Users/marshall/url-server-cherrypy/trunk/filesystem/etc'
+let g:netrw_dirhist_3='/Users/marshall/ad-server/app'
+let g:netrw_dirhist_4='/Users/marshall/git/uce-node/coverage'
+let g:netrw_dirhist_5='/Users/marshall/git/uce-node/test'
+let g:netrw_dirhist_6='/Users/marshall/ad-server/app'
+let g:netrw_dirhist_7='/Users/marshall/sickbeard/SickBeard'
+let g:netrw_dirhist_8='/Users/marshall/Tornado-JSON/demos/helloworld/helloworld'
+let g:netrw_dirhist_9='/Users/marshall/Horde3D/Horde3D/Samples/Chicago'

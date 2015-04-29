@@ -48,9 +48,9 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Tab navigation
-nnoremap <C-k> :tabprevious<CR>
-nnoremap <C-j> :tabnext<CR>
-nnoremap <C-t> :tabnew<CR>
+" nnoremap <C-k> :tabprevious<CR>
+" nnoremap <C-j> :tabnext<CR>
+" nnoremap <C-t> :tabnew<CR>
 
 set list
 set listchars=tab:>.,extends:#,nbsp:.
@@ -68,8 +68,8 @@ syn on
 colorscheme jellybeans
 
 if has("gui_running")
-  "colorscheme wombat
-  colorscheme jellybeans
+  colorscheme wombat
+  "colorscheme jellybeans
   set guioptions=egmrt
   set guifont=Bitstream\ Vera\ Sans\ Mono:h14
   "set number
@@ -113,8 +113,8 @@ nnoremap <silent> <C-f>d     :FufDir<CR>
 
 map ,f :FufFile **/<CR>
 
-" similar to textmate ctrl-T
-map <C-t> :FufFile **/<CR>
+" ctrl-f+t does textmate style file find
+map <C-f>t :FufFile **/<CR>
 
 " use sudo to save file if needed
 cmap w!! w !sudo tee % >/dev/null
@@ -124,9 +124,29 @@ let g:clang_user_options='|| exit 0'
 let g:clang_complete_auto = 1
 let g:clang_complete_copen = 1
 
-" vim screen
-"let g:ScreenImpl='Tmux' " I use tmux
-"noremap <leader>S :ScreenShell " Open a shell/repl
-"vnoremap <leader>s :ScreenSend<CR> " send current visual selection to a shell/repl
-"noremap <leader>s :ScreenSend<CR> " send a whole buffer to shell/repl
-"
+" Enable status line always
+set laststatus=2
+
+if version >= 700
+  au InsertEnter * hi StatusLine term=reverse ctermbg=6 gui=undercurl guisp=Magenta
+  au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+endif
+
+" use scope if possible
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+
+  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+endif
+
