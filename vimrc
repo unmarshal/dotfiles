@@ -2,8 +2,11 @@ filetype on " recognize file type based on filename extension
 filetype plugin on " load plugins directory
 filetype plugin indent on
 
-retab
+" jellybeans is the best colorscheme for the terminal
+colorscheme jellybeans
 
+syn on
+retab
 set modeline
 set modelines=50
 set tabstop=2
@@ -20,10 +23,12 @@ set viminfo='10,\"100,:20,%,n~/.viminfo " remember history of cursor
 set list " display whitespace
 set listchars=tab:>.,extends:#,nbsp:.
 set hlsearch
+set incsearch
 set backspace=2
 set encoding=utf8
 set ruler
 set laststatus=2 " always enable status line
+set number " enable line numbers
 
 set statusline=%t       "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -48,22 +53,6 @@ nmap Q gqap
 noremap <C-k> :tabprevious<CR>
 noremap <C-j> :tabnext<CR>
 noremap <C-t> :tabnew<CR>
-
-
-" enable syntax highlighting
-syn on
-
-" My favorite colors
-"
-"colorscheme desert-warm-256
-"colorscheme wombat
-"colorscheme jellybeans
-
-" default colors
-"colorscheme desert-warm-256
-"colorscheme wombat
-colorscheme jellybeans
-
 
 function! ResCur()
   if line("'\"") <= line("$")
@@ -147,11 +136,11 @@ map ,f :FufFile **/<CR>
 map <C-f>t :FufFile **/<CR>
 
 if has("gui_running")
+  " the wombat colorscheme is excellent for the gui
   colorscheme wombat
   set guioptions=egmrt
   set guifont=Bitstream\ Vera\ Sans\ Mono:h14
   "set guifont=Menlo:h14
-  set number
   set guioptions-=T " remove the nasty bar at the top
   set lines=46
   set showtabline=2
