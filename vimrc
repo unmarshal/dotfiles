@@ -2,6 +2,8 @@ filetype on " recognize file type based on filename extension
 filetype plugin on " load plugins directory
 filetype plugin indent on
 
+retab
+
 set modeline
 set modelines=50
 set tabstop=2
@@ -12,27 +14,28 @@ set smarttab
 set expandtab
 set autoindent
 set smartindent
-retab "convert tabs to spaces
-
-au BufNewFile,BufRead *.hbs set filetype=html
-au BufNewFile,BufRead *.html.* set filetype=html
-au BufNewFile,BufRead *.jst.* set filetype=html
-
-au BufNewFile,BufRead *.hql set filetype=hive
-au BufNewFile,BufRead *.q set filetype=hive
-
-au BufNewFile,BufRead Gemfile* set filetype=ruby
-
-" remember history of cursor
-set viminfo='10,\"100,:20,%,n~/.viminfo
-
-" remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-
+set pastetoggle=<C-v> " good binding for paste since i do not use F keys
 set ofu=syntaxcomplete#Complete
+set viminfo='10,\"100,:20,%,n~/.viminfo " remember history of cursor
+set list " display whitespace
+set listchars=tab:>.,extends:#,nbsp:.
+set hlsearch
+set backspace=2
+set encoding=utf8
+set ruler
+set laststatus=2 " always enable status line
 
-" good binding for paste since i don't use F keys
-set pastetoggle=,p
+set statusline=%t       "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%y      "filetype
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
 
 " remap : to ; to save hitting and holding space
 nnoremap ; :
@@ -41,42 +44,26 @@ nnoremap ; :
 vmap Q gq
 nmap Q gqap
 
-" Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
 " Tab navigation
-" nnoremap <C-k> :tabprevious<CR>
-" nnoremap <C-j> :tabnext<CR>
-" nnoremap <C-t> :tabnew<CR>
+noremap <C-k> :tabprevious<CR>
+noremap <C-j> :tabnext<CR>
+noremap <C-t> :tabnew<CR>
 
-set list
-set listchars=tab:>.,extends:#,nbsp:.
-autocmd filetype html,xml set listchars-=tab:>.
-
-" html and xml files can have tabs
-autocmd filetype html,xml set listchars-=tab:>.
 
 " enable syntax highlighting
 syn on
+
+" My favorite colors
+"
+"colorscheme desert-warm-256
+"colorscheme wombat
+"colorscheme jellybeans
 
 " default colors
 "colorscheme desert-warm-256
 "colorscheme wombat
 colorscheme jellybeans
 
-if has("gui_running")
-  colorscheme wombat
-  "colorscheme jellybeans
-  set guioptions=egmrt
-  set guifont=Bitstream\ Vera\ Sans\ Mono:h14
-  "set number
-  set guioptions-=T " remove the nasty bar at the top
-  set lines=46
-  set showtabline=2
-endif
 
 function! ResCur()
   if line("'\"") <= line("$")
@@ -98,34 +85,6 @@ call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-" Fuzzy File Finder
-let g:fuf_modesDisable = []
-let g:fuf_mrufile_maxItem = 1000
-let g:fuf_mrucmd_maxItem = 400
-let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
-
-nnoremap <silent> <C-f>l     :FufLine<CR>
-nnoremap <silent> <C-f><C-p> :FufFileWithFullCwd<CR>
-nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
-nnoremap <silent> <C-f>p     :FufFile<CR>
-nnoremap <silent> <C-f>D     :FufDirWithFullCwd<CR>
-nnoremap <silent> <C-f>d     :FufDir<CR>
-
-map ,f :FufFile **/<CR>
-
-" ctrl-f+t does textmate style file find
-map <C-f>t :FufFile **/<CR>
-
-" use sudo to save file if needed
-cmap w!! w !sudo tee % >/dev/null
-
-" c++ with clang
-let g:clang_user_options='|| exit 0'
-let g:clang_complete_auto = 1
-let g:clang_complete_copen = 1
-
-" Enable status line always
-set laststatus=2
 
 if version >= 700
   au InsertEnter * hi StatusLine term=reverse ctermbg=6 gui=undercurl guisp=Magenta
@@ -150,3 +109,50 @@ if has('cscope')
   command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
 
+" Force file extensions to be opened as type
+au BufNewFile,BufRead *.hbs set filetype=html
+au BufNewFile,BufRead *.html.* set filetype=html
+au BufNewFile,BufRead *.jst.* set filetype=html
+au BufNewFile,BufRead *.hql set filetype=hive
+au BufNewFile,BufRead *.q set filetype=hive
+au BufNewFile,BufRead Gemfile* set filetype=ruby
+
+" html and xml files can have tabs
+autocmd filetype html,xml set listchars-=tab:>.
+
+" remove trailing whitespace on write
+autocmd BufWritePre * :%s/\s\+$//e
+
+" c++ with clang
+let g:clang_user_options='|| exit 0'
+let g:clang_complete_auto = 1
+let g:clang_complete_copen = 1
+
+" Fuzzy File Finder
+let g:fuf_modesDisable = []
+let g:fuf_mrufile_maxItem = 1000
+let g:fuf_mrucmd_maxItem = 400
+let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
+
+nnoremap <silent> <C-f>l     :FufLine<CR>
+nnoremap <silent> <C-f><C-p> :FufFileWithFullCwd<CR>
+nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
+nnoremap <silent> <C-f>p     :FufFile<CR>
+nnoremap <silent> <C-f>D     :FufDirWithFullCwd<CR>
+nnoremap <silent> <C-f>d     :FufDir<CR>
+
+map ,f :FufFile **/<CR>
+
+" ctrl-f+t does textmate style file find
+map <C-f>t :FufFile **/<CR>
+
+if has("gui_running")
+  colorscheme wombat
+  set guioptions=egmrt
+  set guifont=Bitstream\ Vera\ Sans\ Mono:h14
+  "set guifont=Menlo:h14
+  set number
+  set guioptions-=T " remove the nasty bar at the top
+  set lines=46
+  set showtabline=2
+endif
