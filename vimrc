@@ -3,7 +3,8 @@ filetype plugin on " load plugins directory
 filetype plugin indent on
 
 " jellybeans is the best colorscheme for the terminal
-colorscheme jellybeans
+"colorscheme jellybeans
+colorscheme xoria256
 
 syn on
 retab
@@ -105,6 +106,7 @@ au BufNewFile,BufRead *.jst.* set filetype=html
 au BufNewFile,BufRead *.hql set filetype=hive
 au BufNewFile,BufRead *.q set filetype=hive
 au BufNewFile,BufRead Gemfile* set filetype=ruby
+au BufNewFile,BufRead *.json set filetype=javascript
 
 " html and xml files can have tabs
 autocmd filetype html,xml set listchars-=tab:>.
@@ -137,7 +139,8 @@ map <C-f>t :FufFile **/<CR>
 
 if has("gui_running")
   " the wombat colorscheme is excellent for the gui
-  colorscheme wombat
+  " colorscheme wombat
+  colorscheme rdark
   set guioptions=egmrt
   set guifont=Bitstream\ Vera\ Sans\ Mono:h14
   "set guifont=Menlo:h14
