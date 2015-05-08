@@ -23,12 +23,24 @@ set ofu=syntaxcomplete#Complete
 set viminfo='10,\"100,:20,%,n~/.viminfo " remember history of cursor
 set list " display whitespace
 set listchars=tab:>.,extends:#,nbsp:.
-set hlsearch
 set incsearch
 set backspace=2
 set encoding=utf8
 set ruler
 set laststatus=2 " always enable status line
+
+" Make highlight search toggle
+set hlsearch!
+nnoremap <F3> :set hlsearch!<CR>
+
+" Turn off highlight search on startup
+set nohlsearch
+
+" Make line numbers toggle
+set number!
+nnoremap <F2> :set number!<CR>
+
+" Turn on numbers at startup
 set number " enable line numbers
 
 set statusline=%t       "tail of the filename
