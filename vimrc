@@ -77,8 +77,9 @@ call pathogen#helptags()
 
 
 if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=6 gui=undercurl guisp=Magenta
-  au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+  au InsertEnter * hi StatusLine term=reverse ctermbg=0 ctermfg=1 guibg=DarkGray guifg=Red
+  au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermfg=0 guibg=DarkGray guifg=Black
+  hi statusline term=reverse ctermbg=0 ctermfg=0 guibg=Black guifg=Gray
 endif
 
 " use scope if possible
