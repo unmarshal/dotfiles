@@ -21,6 +21,9 @@ HISTIGNORE="&:[ ]*:exit"
 EDITOR=vim
 PS1='$underline$fgcyan<\u@\h>$reset $bold$fgwhite[\t]$reset$fgcyan (\w)$reset $bold$fgpurple$(__git_ps1 "(%s)")$reset\n\$ '
 
+# Add google chromium deploy tools to path
+PATH=~/deploy_tools:$PATH
+
 ulimit -n 1024
 ulimit -c unlimited
 

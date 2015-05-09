@@ -63,9 +63,10 @@ vmap Q gq
 nmap Q gqap
 
 " Tab navigation
-noremap <C-k> :tabprevious<CR>
-noremap <C-j> :tabnext<CR>
-noremap <C-t> :tabnew<CR>
+noremap <Leader>k :tabprevious<CR>
+noremap <Leader>j :tabnext<CR>
+noremap <Leader>t :tabnew<CR>
+"noremap <-t> :tabnew<CR>
 
 function! ResCur()
   if line("'\"") <= line("$")
@@ -86,7 +87,6 @@ vmap <C-z> <gv
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-
 
 if version >= 700
   au InsertEnter * hi StatusLine term=reverse ctermbg=0 ctermfg=1 guibg=DarkGray guifg=Red
@@ -138,26 +138,30 @@ let g:fuf_mrufile_maxItem = 1000
 let g:fuf_mrucmd_maxItem = 400
 let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 
-nnoremap <silent> <C-f>l     :FufLine<CR>
-nnoremap <silent> <C-f><C-p> :FufFileWithFullCwd<CR>
-nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
-nnoremap <silent> <C-f>p     :FufFile<CR>
-nnoremap <silent> <C-f>D     :FufDirWithFullCwd<CR>
-nnoremap <silent> <C-f>d     :FufDir<CR>
-
-map ,f :FufFile **/<CR>
-
-" ctrl-f+t does textmate style file find
-map <C-f>t :FufFile **/<CR>
+" Use multichar commands \fd \ff
+nnoremap <silent> <Leader>fl :FufLine<CR>
+nnoremap <silent> <Leader>ff :FufFile **/<CR>
+nnoremap <silent> <Leader>fd :FufDir<CR>
 
 if has("gui_running")
   " the wombat colorscheme is excellent for the gui
-  " colorscheme wombat
-  colorscheme rdark
+  colorscheme wombat
+  "colorscheme rdark
   set guioptions=egmrt
   set guifont=Bitstream\ Vera\ Sans\ Mono:h14
-  "set guifont=Menlo:h14
+  " set guifont=Menlo:h14
   set guioptions-=T " remove the nasty bar at the top
   set lines=46
   set showtabline=2
+endif
+
+let os=substitute(system('uname'), '\n', '', '')
+
+" Fix clang library path
+if os == 'Darwin' || os == 'Mac'
+  let s:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+
+  if isdirectory(s:clang_library_path)
+    let g:clang_library_path=s:clang_library_path
+  endif
 endif
