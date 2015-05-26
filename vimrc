@@ -40,6 +40,9 @@ set nohlsearch
 set number!
 nnoremap <F2> :set number!<CR>
 
+" Open nerd tree with \[
+nnoremap <Leader>] :NERDTreeToggle<CR>
+
 " Turn on numbers at startup
 set number " enable line numbers
 
@@ -88,6 +91,7 @@ call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+
 if version >= 700
   au InsertEnter * hi StatusLine term=reverse ctermbg=0 ctermfg=1 guibg=DarkGray guifg=Red
   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermfg=0 guibg=DarkGray guifg=Black
@@ -120,6 +124,7 @@ au BufNewFile,BufRead *.hql set filetype=hive
 au BufNewFile,BufRead *.q set filetype=hive
 au BufNewFile,BufRead Gemfile* set filetype=ruby
 au BufNewFile,BufRead *.json set filetype=javascript
+au BufNewFile,BufRead Vagrantfile set filetype=ruby
 
 " html and xml files can have tabs
 autocmd filetype html,xml set listchars-=tab:>.
