@@ -3,8 +3,8 @@ filetype plugin on " load plugins directory
 filetype plugin indent on
 
 " jellybeans is the best colorscheme for the terminal
-"colorscheme jellybeans
-colorscheme xoria256
+colorscheme jellybeans
+" colorscheme xoria256
 
 syn on
 retab
@@ -44,7 +44,7 @@ nnoremap <F2> :set number!<CR>
 nnoremap <Leader>] :NERDTreeToggle<CR>
 
 " Turn on numbers at startup
-set number " enable line numbers
+set nonumber " enable line numbers
 
 set statusline=%t       "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -125,6 +125,7 @@ au BufNewFile,BufRead *.q set filetype=hive
 au BufNewFile,BufRead Gemfile* set filetype=ruby
 au BufNewFile,BufRead *.json set filetype=javascript
 au BufNewFile,BufRead Vagrantfile set filetype=ruby
+au BufNewFile,BufRead *.g4 set filetype=antlr
 
 " html and xml files can have tabs
 autocmd filetype html,xml set listchars-=tab:>.

@@ -25,7 +25,7 @@ PS1='$underline$fgcyan<\u@\h>$reset $bold$fgwhite[\t]$reset$fgcyan (\w)$reset $b
 PATH=~/deploy_tools:$PATH
 
 ulimit -n 1024
-ulimit -c unlimited
+# ulimit -c unlimited
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
