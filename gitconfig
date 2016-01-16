@@ -1,6 +1,6 @@
 [user]
-  name = Marshall Allen Beddoe
-  email = unmarshal@gmail.com
+  name = Marshall Beddoe
+  email = marshall@menlosecurity.com
 
 [alias]
   type = cat-file -t
@@ -24,10 +24,18 @@
   d = diff --color-words
 
 [color]
-  ui = auto
+  ui = true
 [core]
   excludesfile = /Users/marshall/.gitignore_global
   whitespace = trailing-space,space-before-tab
 
 [push]
-	default = matching
+  default = current
+
+[commit]
+
+[merge]
+  ff = only
+
+[pull]
+  rebase = true

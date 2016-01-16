@@ -29,6 +29,9 @@ set encoding=utf8
 set ruler
 set laststatus=2 " always enable status line
 
+" set cpp tabs to 2 spaces for chromium project
+autocmd filetype cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2
+
 " Make highlight search toggle
 set hlsearch!
 nnoremap <F3> :set hlsearch!<CR>
@@ -57,6 +60,14 @@ set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
+
+
+let mapleader = "\<Space>"
+
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " remap : to ; to save hitting and holding space
 nnoremap ; :
@@ -99,22 +110,22 @@ if version >= 700
 endif
 
 " use scope if possible
-if has('cscope')
-  set cscopetag cscopeverbose
-
-  if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-  endif
-
-  cnoreabbrev csa cs add
-  cnoreabbrev csf cs find
-  cnoreabbrev csk cs kill
-  cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
-  cnoreabbrev csh cs help
-
-  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
-endif
+" if has('cscope')
+"   set cscopetag cscopeverbose
+"
+"   if has('quickfix')
+"     set cscopequickfix=s-,c-,d-,i-,t-,e-
+"   endif
+"
+"   cnoreabbrev csa cs add
+"   cnoreabbrev csf cs find
+"   cnoreabbrev csk cs kill
+"   cnoreabbrev csr cs reset
+"   cnoreabbrev css cs show
+"   cnoreabbrev csh cs help
+"
+"   command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+" endif
 
 " Force file extensions to be opened as type
 au BufNewFile,BufRead *.hbs set filetype=html
