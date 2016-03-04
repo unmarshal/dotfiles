@@ -21,8 +21,6 @@ HISTIGNORE="&:[ ]*:exit"
 EDITOR=vim
 PS1='$underline$fgcyan<\u@\h>$reset $bold$fgwhite[\t]$reset$fgcyan (\w)$reset $bold$fgpurple$(__git_ps1 "(%s)")$reset\n\$ '
 
-HOMEBREW_GITHUB_API_TOKEN=49eb74b053a76d5cd9a75cb4a19a85a732e182f1
-
 # Add google chromium deploy tools to path
 PATH=~/deploy_tools:$PATH
 
