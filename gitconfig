@@ -11,20 +11,18 @@
   master = pull --rebase
 
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 
   hist = log --color --pretty=format:\"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\" --relative-date --graph
 
   unstage = reset HEAD --
   restore = checkout --
-  cn = commit --no-verify
-  co = checkout
   visualize = !gitk
   graph = log --color --graph --pretty=format:\"%h | %ad | %an | %s%d\" --date=short
   d = diff --color-words
 
 [color]
   ui = true
+
 [core]
   excludesfile = /Users/marshall/.gitignore_global
   whitespace = trailing-space,space-before-tab

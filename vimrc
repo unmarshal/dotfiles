@@ -1,10 +1,14 @@
+set termguicolors
+highlight Comment cterm=italic gui=italic
+
 filetype on " recognize file type based on filename extension
 filetype plugin on " load plugins directory
 filetype plugin indent on
 
 " jellybeans is the best colorscheme for the terminal
 colorscheme jellybeans
-" colorscheme xoria256
+"colorscheme xoria256
+"colorscheme argonaut
 
 syn on
 retab
@@ -31,6 +35,15 @@ set laststatus=2 " always enable status line
 
 " set cpp tabs to 2 spaces for chromium project
 autocmd filetype cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2
+
+" set py tabs to 3 spaces
+autocmd filetype python setlocal tabstop=3 softtabstop=3 shiftwidth=3
+
+" set javascript tabs to 3 spaces
+autocmd filetype javascript setlocal tabstop=3 softtabstop=3 shiftwidth=3
+
+" set yaml tabs to 3 spaces
+autocmd filetype yaml setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 " Make highlight search toggle
 set hlsearch!
@@ -102,30 +115,11 @@ call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-
 if version >= 700
   au InsertEnter * hi StatusLine term=reverse ctermbg=0 ctermfg=1 guibg=DarkGray guifg=Red
   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermfg=0 guibg=DarkGray guifg=Black
   hi statusline term=reverse ctermbg=0 ctermfg=0 guibg=Black guifg=Gray
 endif
-
-" use scope if possible
-" if has('cscope')
-"   set cscopetag cscopeverbose
-"
-"   if has('quickfix')
-"     set cscopequickfix=s-,c-,d-,i-,t-,e-
-"   endif
-"
-"   cnoreabbrev csa cs add
-"   cnoreabbrev csf cs find
-"   cnoreabbrev csk cs kill
-"   cnoreabbrev csr cs reset
-"   cnoreabbrev css cs show
-"   cnoreabbrev csh cs help
-"
-"   command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
-" endif
 
 " Force file extensions to be opened as type
 au BufNewFile,BufRead *.hbs set filetype=html
@@ -144,41 +138,17 @@ autocmd filetype html,xml set listchars-=tab:>.
 " remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
 
-" c++ with clang
-let g:clang_user_options='|| exit 0'
-let g:clang_complete_auto = 1
-let g:clang_complete_copen = 1
+hi Normal guibg=NONE ctermbg=NONE
 
-" Fuzzy File Finder
-let g:fuf_modesDisable = []
-let g:fuf_mrufile_maxItem = 1000
-let g:fuf_mrucmd_maxItem = 400
-let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
-
-" Use multichar commands \fd \ff
-nnoremap <silent> <Leader>fl :FufLine<CR>
-nnoremap <silent> <Leader>ff :FufFile **/<CR>
-nnoremap <silent> <Leader>fd :FufDir<CR>
-
-if has("gui_running")
-  " the wombat colorscheme is excellent for the gui
-  colorscheme wombat
-  "colorscheme rdark
-  set guioptions=egmrt
-  set guifont=Bitstream\ Vera\ Sans\ Mono:h14
-  " set guifont=Menlo:h14
-  set guioptions-=T " remove the nasty bar at the top
-  set lines=46
-  set showtabline=2
-endif
-
-let os=substitute(system('uname'), '\n', '', '')
-
-" Fix clang library path
-if os == 'Darwin' || os == 'Mac'
-  let s:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-
-  if isdirectory(s:clang_library_path)
-    let g:clang_library_path=s:clang_library_path
-  endif
-endif
+" let t:is_transparent = 0
+" function! Toggle_transparent()
+"     if t:is_transparent == 0
+"         hi Normal guibg=NONE ctermbg=NONE
+"         let t:is_transparent = 1
+"     else
+"         set background=dark
+"         let t:is_tranparent = 0
+"     endif
+" endfunction
+" nnoremap <F4> : call Toggle_transparent()<CR>
+"
