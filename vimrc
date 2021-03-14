@@ -10,6 +10,9 @@ colorscheme jellybeans
 "colorscheme xoria256
 "colorscheme argonaut
 
+" Find the tags file
+set tags=./tags;,tags;
+
 syn on
 retab
 set modeline

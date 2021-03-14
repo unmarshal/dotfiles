@@ -26,6 +26,7 @@
 [core]
   excludesfile = /Users/marshall/.gitignore_global
   whitespace = trailing-space,space-before-tab
+  editor=vim
 
 [push]
   default = current

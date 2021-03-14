@@ -1,0 +1,20 @@
+# load calculator with math lib
+alias bc='bc -l'
+
+# gnuls > bsd ls: requires coreutils from homebrew
+alias ls='gls --color -sFhb --group-directories-first'
+
+alias l='ls -l'
+
+# stdin to copy paste buffer
+alias xcut="pbcopy"
+
+function git_personal() {
+  ssh-add -D
+  ssh-add ~/.ssh/id_rsa
+}
+
+function git_work() {
+  ssh-add -D
+  ssh-add ~/.ssh/marshall_surfcrew_rsa
+}
