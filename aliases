@@ -18,3 +18,9 @@ function git_work() {
   ssh-add -D
   ssh-add ~/.ssh/marshall_surfcrew_rsa
 }
+
+alias ppjson="python -m json.tool"
+
+function enter_ns {
+  sudo nsenter -t $1 -r -w -a
+}
