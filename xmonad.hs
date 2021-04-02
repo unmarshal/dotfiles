@@ -90,5 +90,15 @@ myKeys =
   , ("M-C-<Space>", sendMessage NextLayout)
 
   -- Dmenu
-  , ("M-<Space>", spawn "dmenu_run") ]
+  , ("M-<Space>", spawn "dmenu_run")
+
+  -- Brightness
+  , ("<XF86MonBrightnessUp>", spawn "lux -a 10%")
+  , ("<XF86MonBrightnessDown>", spawn "lux -s 10%")
+
+  -- Volume
+  , ("<XF86AudioMute>", spawn "amixer set Speaker toggle && amixer set Master toggle")
+  , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
+  , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+  ]
 
