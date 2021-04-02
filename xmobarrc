@@ -11,8 +11,7 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                         , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                         , Run Wireless "wlp0s20f3"
                           [ "-a", "l"
-                          , "-w", "3"
-                          , "-t", "<fc=#8888FF>WIFI:</fc><quality>%"
+                          , "-w", "12"
                           , "-L", "50"
                           , "-H", "75"
                           , "-l", "red"
@@ -37,5 +36,5 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% | %cpu% | %memory% * %swap% | %wlp0s20f3wi% }{<fc=#ee9a00>%date%</fc> | %uname% | %battery%"
+        , template = "%StdinReader% | %cpu% | %memory% * %swap%}{<fc=#ee9a00>%date%</fc> | Power %battery% | %wlp0s20f3wi%"
         }
