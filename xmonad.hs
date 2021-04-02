@@ -1,4 +1,4 @@
--- Dependencies: picom, mobar
+-- Dependencies: picom, xmobar
 
 import XMonad
 import XMonad.Util.Run(spawnPipe)
@@ -17,13 +17,12 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops -- required for compositor
 
 -- Actions
-import XMonad.Actions.Minimize (minimizeWindow)
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
 import XMonad.Actions.CopyWindow (kill1, copyToAll, killAllOtherCopies, runOrCopy)
 import XMonad.Actions.WithAll (sinkAll, killAll)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen, swapNextScreen)
 
+-- Font not currently used
 myFont = "xfg:JetBrainsMono Nerd Font:regular:pixelsize=12"
 myModMask = mod1Mask -- set mod key to alt
 myTerminal = "alacritty"
@@ -52,7 +51,11 @@ main = do
 ---AUTOSTART
 myStartupHook = do
   spawnOnce "picom&"
+  spawnOnce "stalonetray&"
   spawnOnce "xset r rate 200 25"
+  spawnOnce "feh --bg-scale ~/dotfiles/bg/cityscape.jpg"
+  spawnOnce "syndaemon -i 0.1 -t -K -R -d" -- disable mouse input for 100 ms on keypress
+  spawnOnce "dropbox start"
   setWMName "XMonad"
 
 ---KEYBINDINGS
@@ -83,21 +86,8 @@ myKeys =
   , ("M-S-s", windows copyToAll)
   , ("M-C-s", killAllOtherCopies)
 
-  -- Workspaces
-  , ("M-.", nextScreen)
-  , ("M-,", prevScreen)
-
   -- Layouts
   , ("M-C-<Space>", sendMessage NextLayout)
-  -- -- , ("M-S-=", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
-  -- -- , ("M-S-f", sendMessage (T.Toggle "float"))
-  -- , ("M-S-x", sendMessage $ Toggle REFLECTX)
-  -- , ("M-S-y", sendMessage $ Toggle REFLECTY)
-  -- , ("M-S-m", sendMessage $ Toggle MIRROR)
-  -- , ("M-<KP_Multiply>", sendMessage (IncMasterN 1))   -- Increase number of clients in the master pane
-  -- , ("M-<KP_Divide>", sendMessage (IncMasterN (-1)))  -- Decrease number of clients in the master pane
-  -- , ("M-S-<KP_Multiply>", increaseLimit)              -- Increase number of windows that can be shown
-  -- , ("M-S-<KP_Divide>", decreaseLimit)                -- Decrease number of windows that can be shown
 
   -- Dmenu
   , ("M-<Space>", spawn "dmenu_run") ]
