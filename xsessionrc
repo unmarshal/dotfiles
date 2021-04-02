@@ -1,0 +1,15 @@
+feh --bg-scale ~/dotfiles/bg/cityscape.jpg
+
+# Turn off awful zone sensitive touchpad
+synclient RightButtonAreaLeft=0
+synclient RightButtonAreaTop=0
+
+# Move this to synapse xorg conf
+synclient MiddleButtonAreaLeft=0
+synclient MiddleButtonAreaTop=0
+
+xinput set-prop 13 'Synaptics Scrolling Distance' 64 64
+
+xrdb -merge .Xresources
+
+stalonetray&
