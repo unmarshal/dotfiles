@@ -1,6 +1,6 @@
 [user]
   name = Marshall Beddoe
-  email = marshall@menlosecurity.com
+  email = mbeddoe@gmail.com
 
 [alias]
   type = cat-file -t
