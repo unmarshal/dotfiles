@@ -93,7 +93,7 @@ myStartupHook = do
   spawnOnce "stalonetray&"
   spawnOnce "xset r rate 200 25"
   spawnOnce "feh --bg-scale ~/dotfiles/bg/cityscape.jpg"
-  --spawnOnce "syndaemon -i 0.1 -t -K -R -d" -- disable mouse input for 100 ms on keypress
+  spawnOnce "xmodmap ~/.Xmodmaprc"
   spawnOnce "dropbox start"
   setWMName "XMonad"
 
@@ -107,7 +107,7 @@ myKeys =
   -- Windows
   , ("M-S-c", kill1)                            -- Kill currently focused client
   , ("M-S-a", killAll)                          -- Kill all windows in current workspace
-  , ("M4-l", spawn "slock /usr/sbin/s2ram")
+  , ("M1-S-l", spawn "slock /usr/sbin/s2ram")
 
   -- Floating windows
   , ("M-<Delete>", withFocused $ windows . W.sink)  -- Push floating window back to tile.
