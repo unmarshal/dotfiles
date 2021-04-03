@@ -150,7 +150,9 @@ myKeys =
   , (("M-S-o"), spawnSelected'
     [ ("Brave", "brave-browser")
     , ("Signal", "signal-desktop")
+    , ("1Password", "1password")
     , ("Pavucontrol", "pavucontrol")
+    , ("Daedalus Wallet", "daedalus-mainnet")
     , ("Spotify", "spotify")
     ])
 
