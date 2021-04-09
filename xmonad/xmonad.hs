@@ -9,10 +9,6 @@ import System.Exit (exitSuccess)
 import Text.Printf
 import qualified XMonad.StackSet as W
 
-import XMonad.Hooks.UrgencyHook
-import XMonad.Util.NamedWindows
---import XMonad.Util.Run
-
 -- Utilities
 import XMonad.Util.Loggers
 import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings)
@@ -73,19 +69,10 @@ myBorderWidth = 3
 myNormalBorderColor = "#292d3e"
 myFocusedBorderColor = "#bbc5ff"
 
-data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
-
-instance UrgencyHook LibNotifyUrgencyHook where
-    urgencyHook LibNotifyUrgencyHook w = do
-        name     <- getName w
-        Just idx <- fmap (W.findTag w) $ gets windowset
-
-        safeSpawn "notify-send" [show name, "workspace " ++ idx]
-
 main = do
     xmproc <- spawnPipe "xmobar"
 
-    xmonad $ withUrgencyHook LibNotifyUrgencyHook $ ewmh desktopConfig
+    xmonad $ ewmh desktopConfig
         { terminal   = myTerminal
         , borderWidth = myBorderWidth
         , normalBorderColor = myNormalBorderColor
@@ -157,7 +144,7 @@ myKeys =
   , ("<XF86MonBrightnessDown>", spawn "lux -s 10%")
 
   -- Volume
-  , ("<XF86AudioMute>", spawn "amixer set Speaker toggle && amixer set Master toggle")
+  , ("<XF86AudioMute>", spawn "amixer set Master toggle")
   , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
   , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
 
