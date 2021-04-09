@@ -9,6 +9,10 @@ import System.Exit (exitSuccess)
 import Text.Printf
 import qualified XMonad.StackSet as W
 
+import XMonad.Hooks.UrgencyHook
+import XMonad.Util.NamedWindows
+--import XMonad.Util.Run
+
 -- Utilities
 import XMonad.Util.Loggers
 import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings)
@@ -69,10 +73,19 @@ myBorderWidth = 3
 myNormalBorderColor = "#292d3e"
 myFocusedBorderColor = "#bbc5ff"
 
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name     <- getName w
+        Just idx <- fmap (W.findTag w) $ gets windowset
+
+        safeSpawn "notify-send" [show name, "workspace " ++ idx]
+
 main = do
     xmproc <- spawnPipe "xmobar"
 
-    xmonad $ ewmh desktopConfig
+    xmonad $ withUrgencyHook LibNotifyUrgencyHook $ ewmh desktopConfig
         { terminal   = myTerminal
         , borderWidth = myBorderWidth
         , normalBorderColor = myNormalBorderColor
@@ -88,6 +101,7 @@ main = do
         } `additionalKeysP` myKeys
 
 ---AUTOSTART
+---Consider moving to a shell script
 myStartupHook = do
   spawnOnce "picom&"
   spawnOnce "stalonetray&"
@@ -95,6 +109,10 @@ myStartupHook = do
   spawnOnce "feh --bg-scale ~/dotfiles/bg/cityscape.jpg"
   spawnOnce "xmodmap ~/.Xmodmaprc"
   spawnOnce "dropbox start"
+  spawnOnce "synclient RightButtonAreaLeft=0" -- synaptics.conf not working
+  spawnOnce "synclient RightButtonAreaTop=0"
+  spawnOnce "/home/marshall/.xmonad/xautolock.sh&"
+  spawnOnce "/usr/lib/notification-daemon/notification-daemon&"
   setWMName "XMonad"
 
 ---KEYBINDINGS
@@ -150,9 +168,10 @@ myKeys =
   , (("M-S-o"), spawnSelected'
     [ ("Brave", "brave-browser")
     , ("Signal", "signal-desktop")
+    , ("Daedalus Wallet", "daedalus-mainnet")
     , ("1Password", "1password")
     , ("Pavucontrol", "pavucontrol")
-    , ("Daedalus Wallet", "daedalus-mainnet")
+    , ("Ledger Live", "ledger")
     , ("Spotify", "spotify")
     ])
 
